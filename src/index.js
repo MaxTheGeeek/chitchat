@@ -24,6 +24,7 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
     console.log('New Websocket connection');
 
+    //inform other users when user joins the chat ans send welcome msg to user
     socket.emit('message', "welcome to Chitchat");
     socket.broadcast.emit('message','User is online!');
 
@@ -31,15 +32,21 @@ io.on('connection', (socket) => {
         io.emit('message', message);
     })
 
+
+    //inform when user is offline
     socket.on('disconnect', () => {
         io.emit('message', 'User is offline');
     })
 
+    //get cordinates of users and send it as a google map location
     socket.on('sendLocation', (coords) => {
         io.emit('message', `https://maps.google.com/?q=${coords.latitude},${coords.longitude}`)
     })
 })
 
+
+
+//listen to the port and run the server
 server.listen(port, () => {
     console.log(`Server on port ${port}!`);
 })
