@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,24 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <title>Document</title>
 </head>
-<body>
-    <h1>Chat App</h1>
 
-<button id="increment" class="btn btn-sm-success">+1</button>
-<!-- Access to client side socketio libraries     -->
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/chat.js"></script>
+<body>
+    <h1 class="page-header text-center">Chat App</h1>
+    <div class="container">
+        <form id="message-form" class="col-10 mx-auto my-5 p-5 border border-2" action="" method="post">
+            <div class="col-12 form-group">
+                <input type="text" name="msg" class="form-control-lg msg" placeholder="Write your message ...">
+                <button class="btn btn-success my-3" id="btn">Send</button>
+            </div>
+        </form>
+        <div class="col-10">
+            <button class="btn btn-primary mx-auto" id="send-location">Send Location</button>
+        </div>
+
+    </div>
+    <!-- Access to client side socketio libraries     -->
+    <script src=" /socket.io/socket.io.js "></script>
+    <script src="/js/chat.js "></script>
 </body>
+
 </html>
