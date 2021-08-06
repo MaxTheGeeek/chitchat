@@ -2,6 +2,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io')
+const {generateMessage , generateLocationMessage} = require('./utils/messages')
 
 //call express package
 const app = express();
@@ -25,24 +26,24 @@ io.on('connection', (socket) => {
     console.log('New Websocket connection');
 
     //inform other users when user joins the chat ans send welcome msg to user
-    socket.emit('message', "welcome to Chitchat");
-    socket.broadcast.emit('message','User is online!');
+    socket.emit('message', generateMessage('Welcome!'));
+    socket.broadcast.emit('message', generateMessage('User is online!'));
 
     socket.on('sendMessage', (message , callback) => {
-        io.emit('message', message);
+        io.emit('message', generateMessage(message));
         callback('message delivered');
     })
 
 
     //inform when user goes offline
     socket.on('disconnect', () => {
-        io.emit('message','User is offline');
+        io.emit('message', generateMessage('User is offline'));
     })
 
     
     //get cordinates of users and send it as a google map location
     socket.on('sendLocation', (coords, callback) => {
-        io.emit('locationMessage', `https://maps.google.com/?q=${coords.latitude},${coords.longitude}`)
+        io.emit('locationMessage',  generateLocationMessage(`https://maps.google.com/?q=${coords.latitude},${coords.longitude}`))
         callback('location shared!');
     })
 })

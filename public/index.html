@@ -14,7 +14,7 @@
     <div class="container">
         <div class="col-12 my-3 p-3">
             <div class="col-10 border border-1 mx-auto">
-                <div class="text-warning" id="messages">
+                <div class="text-dark" id="messages">
 
                 </div>
             </div>
@@ -34,13 +34,17 @@
     <!-- Access to client side socketio libraries     -->
     <script id="location-template" type="text/html">
             <div class="overflow-auto">
-                <p><a href="{{url}}" target="_blank">Current Location</a></p>
+                <p><span class="text-info fs-6 font-weight-lighter">{{createdAt}}</span>
+                    <a class="text-break" href="{{url}}" target="_blank">Current Location</a>
+                </p>
             </div>
     </script>
 
     <script id="message-template" type="text/html">
         <div class="overflow-auto">
-            <p>{{message}}</p>
+            <p><span class="text-info fs-6 font-weight-lighter">{{createdAt}}</span>
+                {{ message}}
+            </p>
         </div>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
