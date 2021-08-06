@@ -28,19 +28,22 @@ io.on('connection', (socket) => {
     socket.emit('message', "welcome to Chitchat");
     socket.broadcast.emit('message','User is online!');
 
-    socket.on('sendMessage', (message) => {
+    socket.on('sendMessage', (message , callback) => {
         io.emit('message', message);
+        callback('message delivered');
     })
 
 
-    //inform when user is offline
+    //inform when user goes offline
     socket.on('disconnect', () => {
-        io.emit('message', 'User is offline');
+        io.emit('message','User is offline');
     })
 
+    
     //get cordinates of users and send it as a google map location
-    socket.on('sendLocation', (coords) => {
-        io.emit('message', `https://maps.google.com/?q=${coords.latitude},${coords.longitude}`)
+    socket.on('sendLocation', (coords, callback) => {
+        io.emit('locationMessage', `https://maps.google.com/?q=${coords.latitude},${coords.longitude}`)
+        callback('location shared!');
     })
 })
 
