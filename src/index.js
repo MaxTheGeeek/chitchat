@@ -2,6 +2,29 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
+const dotenv = require('../.env');
+const mongoose = require('mongoose');
+const User = require('../Models/user');
+
+//connect to mongoose
+const uri =
+  'mongodb+srv://max:111@webmax.kirem.mongodb.net/webmax?retryWrites=true&w=majority';
+
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then((res) => console.log('database connected'))
+  .catch((err) => console.log(err));
+
+const max = new User({
+  fullName: 'Majid beh',
+  email: 'max@test.com',
+  password: '111',
+});
+
 const {
   generateMessage,
   generateLocationMessage,
@@ -12,6 +35,7 @@ const {
   getUser,
   getUsersInRoom,
 } = require('./utils/users');
+const res = require('express/lib/response');
 
 const app = express();
 const server = http.createServer(app);

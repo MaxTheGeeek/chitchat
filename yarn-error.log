@@ -1,0 +1,61 @@
+Arguments: 
+  /usr/local/bin/node /opt/homebrew/Cellar/yarn/1.22.11/libexec/bin/yarn.js init
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:/opt/homebrew/sbin
+
+Yarn version: 
+  1.22.11
+
+Node version: 
+  16.6.1
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.11/libexec/lib/cli.js:137023:13)
+      at Interface.emit (node:events:394:28)
+      at Interface._ttyWrite (node:readline:1081:16)
+      at ReadStream.onkeypress (node:readline:288:10)
+      at ReadStream.emit (node:events:394:28)
+      at emitKeys (node:internal/readline/utils:358:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (node:internal/readline/emitKeypressEvents:61:36)
+      at ReadStream.emit (node:events:394:28)
+      at addChunk (node:internal/streams/readable:312:12)
+
+npm manifest: 
+  {
+    "name": "chitchat",
+    "version": "1.0.0",
+    "description": "Final Project",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node src/index.js",
+      "dev": "nodemon src/index.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://gitlab.com/maxbehzadi82/chitchat.git"
+    },
+    "author": "Majid Be",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://gitlab.com/maxbehzadi82/chitchat/issues"
+    },
+    "homepage": "https://gitlab.com/maxbehzadi82/chitchat#readme",
+    "dependencies": {
+      "express": "^4.17.1",
+      "nodemon": "^2.0.12",
+      "socket.io": "^4.1.3"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
