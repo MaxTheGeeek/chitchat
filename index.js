@@ -42,6 +42,8 @@ app.get('/', (req, res) => {
   res.render('login');
 });
 
+app.post('/chat', (req, res) => res.render('chat'));
+
 // app.post('/login', (req, res) => {
 //   res.render('login');
 // });
