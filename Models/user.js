@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
+const emailValidator = require('email-validator');
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  fullName: {
+  username: {
     type: String,
     required: true,
     trim: true,
+    index: { unique: true },
     minlength: 3,
     maxlength: 30,
   },
@@ -19,9 +22,12 @@ const UserSchema = new Schema({
   email: {
     type: String,
     trim: true,
+    lowercase: true,
     unique: true,
-    minlength: 3,
-    maxlength: 30,
+    validate: {
+      validator: emailValidator.validate,
+      message: (props) => `${props.value} is not a valid email!`,
+    },
     required: true,
   },
   password: {
@@ -39,9 +45,10 @@ const UserSchema = new Schema({
     enum: ['admin', 'user'],
     default: 'user',
   },
-  avatar: {
-    type: String,
-  },
+  // avatar: {
+  //   type: String,
+  // },
 });
 
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('user', UserSchema);
+module.exports = User;
