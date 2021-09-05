@@ -2,39 +2,20 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const dotenv = require('../.env');
+const env = require('./.env');
 const mongoose = require('mongoose');
-const User = require('../Models/user');
-
-//connect to mongoose
-const uri =
-  'mongodb+srv://max:111@webmax.kirem.mongodb.net/webmax?retryWrites=true&w=majority';
-
-mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
-  .then((res) => console.log('database connected'))
-  .catch((err) => console.log(err));
-
-const max = new User({
-  fullName: 'Majid beh',
-  email: 'max@test.com',
-  password: '111',
-});
+const db = require('./config/db');
 
 const {
   generateMessage,
   generateLocationMessage,
-} = require('./utils/messages');
+} = require('./src/utils/messages');
 const {
   addUser,
   removeUser,
   getUser,
   getUsersInRoom,
-} = require('./utils/users');
+} = require('./src/utils/users');
 const res = require('express/lib/response');
 
 const app = express();
@@ -42,12 +23,12 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 const port = process.env.PORT || 3000;
-const publicDirectoryPath = path.join(__dirname, '../public');
+const publicDirectoryPath = path.join(__dirname, 'public');
 
 app.use(express.static(publicDirectoryPath));
 
 io.on('connection', (socket) => {
-  console.log('New WebSocket connection');
+  console.log('Socket connected');
 
   socket.on('join', (options, callback) => {
     const { error, user } = addUser({ id: socket.id, ...options });
@@ -97,7 +78,7 @@ io.on('connection', (socket) => {
     if (user) {
       io.to(user.room).emit(
         'message',
-        generateMessage('Admin', `${user.username} has left!`)
+        generateMessage('Admin', `${user.username} left!`)
       );
       io.to(user.room).emit('roomData', {
         room: user.room,

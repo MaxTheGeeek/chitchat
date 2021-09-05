@@ -55,6 +55,10 @@ socket.on('message', (message) => {
   autoscroll();
 });
 
+socket.on('userCount', function (data) {
+  console.log(data.userCount);
+});
+
 socket.on('roomData', ({ room, users }) => {
   const html = Mustache.render(sidebarTemplate, {
     room,

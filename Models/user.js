@@ -9,13 +9,13 @@ const UserSchema = new Schema({
     minlength: 3,
     maxlength: 30,
   },
-//   username: {
-//     type: String,
-//     trim: true,
-//     unique: true,
-//     minlength: 3,
-//     maxlength: 30,
-//   },
+  //   username: {
+  //     type: String,
+  //     trim: true,
+  //     unique: true,
+  //     minlength: 3,
+  //     maxlength: 30,
+  //   },
   email: {
     type: String,
     trim: true,
