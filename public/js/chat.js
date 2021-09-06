@@ -16,9 +16,8 @@ const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML;
 const chitchatTitle = document.querySelector('#chitchat-title').innerHTML;
 
 // Options
-const { username, room } = Qs.parse(location.search, {
-  ignoreQueryPrefix: true,
-});
+const username = document.getElementById('myUsername').innerHTML;
+const room = document.getElementById('myRoom').innerHTML;
 
 // Auto scrolling
 const autoscroll = () => {
@@ -60,6 +59,7 @@ socket.on('userCount', function (data) {
 });
 
 socket.on('roomData', ({ room, users }) => {
+  console.log(users);
   const html = Mustache.render(sidebarTemplate, {
     room,
     users,
@@ -126,3 +126,18 @@ socket.emit('join', { username, room }, (error) => {
     location.href = '/';
   }
 });
+
+// console.log(users)
+// let onlineUsersList = ""
+// for (let i = 0; i < users.length; i++) {
+//   onlineUsersList += `
+//     <li class="userList font-weight-bold">
+//     <img src="img/avatar-2.jpg" alt="avatar" />
+//      ${users[i].username}
+//     <span class="badge badge-success badge-pill">online</span>
+//   </li>
+//   `
+// };
+
+// console.log(onlineUsersList)
+// document.querySelector('#onlineUsers').innerHTML = onlineUsersList;
