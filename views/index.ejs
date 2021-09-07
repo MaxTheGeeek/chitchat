@@ -8,20 +8,20 @@
         <h5 class="text-center">Please select your room</h5>
 
         <form action="/chat" method="POST">
-                 <div class="col-12 text-center">
-          <h5>Display name:</h5>
-          <h5 class="text-center text-warning text-capitalize">
-            <%= username %> 
-          </h5>
-        </div>
-          <!-- <input
+          <div class="col-12 text-center">
+            <h5>Display name:</h5>
+            <p class="text-center text-warning text-capitalize">
+              <%= username %>
+            </p>
+          </div>
+          <input
             class="text-light rounded-pill my-5"
             type="text"
             name="username"
             placeholder="Display name"
             autocomplete="off"
             required
-          /> -->
+          />
           <input
             class="text-light rounded-pill mt-5"
             type="text"
@@ -34,5 +34,6 @@
         </form>
       </div>
     </div>
+    <script src="/js/chat.js"></script>
   </body>
 </html>
