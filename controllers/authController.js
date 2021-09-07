@@ -12,7 +12,7 @@ module.exports.register_post = async (req, res) => {
   const { username, email, password } = req.body;
   try {
     const user = await User.create({ username, email, password });
-    res.redirect('/login');
+    res.status(201).json(user);
   } catch (err) {
     console.log(err);
     res.status(404).send('There is an error');
@@ -24,11 +24,9 @@ module.exports.login_post = async (req, res) => {
 
   try {
     const user = await User.findOne({ username, password });
-    res.render('index', { username });
+    res.render('index', { username: username });
   } catch (err) {
     console.log(err);
     res.status(404).send('There is an error');
   }
 };
-
-

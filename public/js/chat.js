@@ -59,7 +59,8 @@ socket.on('userCount', function (data) {
 });
 
 socket.on('roomData', ({ room, users }) => {
-  console.log(users);
+
+  console.log(users)
   const html = Mustache.render(sidebarTemplate, {
     room,
     users,
@@ -126,6 +127,7 @@ socket.emit('join', { username, room }, (error) => {
     location.href = '/';
   }
 });
+
 
 // console.log(users)
 // let onlineUsersList = ""
