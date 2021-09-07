@@ -2,6 +2,19 @@
 
 WIFI - final project<br/>
 <hr/>
+<h3>Project tools</h3>
+<ul>
+<li>Node.js</li>
+<li>Express.js</li>
+<li>Socket.io</li>
+<li>Mongoose</li>
+<li>MongoDb</li>
+<li>JWT Auth</li>
+<li>EJS view engine</li>
+<li></li>
+</ul>
+
+<hr/><br>
 <h5>Working hours on the project + learning:</h5>
 <ul>
 <li>02.08.2021 = 4 hrs/ </li>  
