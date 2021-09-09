@@ -2,13 +2,9 @@ const mongoose = require('mongoose');
 
 //connect to mongoose
 const uri =
-  'mongodb+srv://max:111@webmax.kirem.mongodb.net/webmax?retryWrites=true&w=majority';
+  'mongodb+srv://maxbehzadi82:1268873Max@webmax.kirem.mongodb.net/chat-app?retryWrites=true&w=majority';
 
 mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    // useCreateIndex: true,
-  })
+  .connect(uri, { keepAlive: true, keepAliveInitialDelay: 300000 })
   .then((res) => console.log('database connected'))
   .catch((err) => console.log(err));

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const emailValidator = require('email-validator');
+const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
@@ -8,7 +9,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    index: { unique: true },
+    unique: true ,
     minlength: 3,
     maxlength: 30,
   },
@@ -49,6 +50,22 @@ const UserSchema = new Schema({
   //   type: String,
   // },
 });
+
+// UserSchema.pre('save', (next) => {
+//   const user = this;
+//   if (this.isNew || this.isModified('password')) {
+//     bcrypt.genSalt(10, (err, salt) => {
+//       if (err) return next(err);
+//       bcrypt.hash(user.password, salt, (err, hash) => {
+//         if (err) return next(err);
+//         user.password = hash;
+//         return next();
+//       });
+//     });
+//   } else {
+//     return next();
+//   }
+// });
 
 const User = mongoose.model('user', UserSchema);
 module.exports = User;

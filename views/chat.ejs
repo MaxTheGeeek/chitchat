@@ -28,6 +28,9 @@
             <img src="img/menu.svg" alt="menu" />
           </a>
           <P id="chitchat" class="text-info"> <%= room %> </P>
+          <form action="/logout" method="post">
+          <button>logout</button>
+          </form>
         </div>
         <div id="messages" class="chat__messages"></div>
         <div class="compose">

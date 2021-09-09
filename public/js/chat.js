@@ -48,6 +48,7 @@ socket.on('message', (message) => {
   const html = Mustache.render(messageTemplate, {
     username: message.username,
     message: message.text,
+    userId: message.userId,
     createdAt: moment(message.createdAt).format('h:mm a'),
   });
   $messages.insertAdjacentHTML('beforeend', html);
@@ -59,8 +60,7 @@ socket.on('userCount', function (data) {
 });
 
 socket.on('roomData', ({ room, users }) => {
-
-  console.log(users)
+  console.log(users);
   const html = Mustache.render(sidebarTemplate, {
     room,
     users,
@@ -127,7 +127,6 @@ socket.emit('join', { username, room }, (error) => {
     location.href = '/';
   }
 });
-
 
 // console.log(users)
 // let onlineUsersList = ""

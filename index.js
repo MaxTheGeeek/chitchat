@@ -1,13 +1,15 @@
 const path = require('path');
 const http = require('http');
 const express = require('express');
-const socketio = require('socket.io');
 const env = require('./.env');
-const mongoose = require('mongoose');
 const db = require('./config/db');
 const ejs = require('ejs');
 const authRoutes = require('./rouets/authRoutes');
+const chatRoutes = require('./rouets/chatRoutes');
 const io = require('./rouets/io');
+const config = require('./config/config');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 const res = require('express/lib/response');
 
@@ -23,19 +25,41 @@ const publicDirectoryPath = path.join(__dirname, 'public');
 app.use(express.static(publicDirectoryPath));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.use(
+  session({
+    key: 'usid',
+    secret: config.sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: true, maxAge: 2 * 60 * 60 * 1000, sameSite: true },
+  })
+);
+
 //View engine
 app.set('view engine', 'ejs');
 
 // routes
 app.use(authRoutes);
-app.get('/', (req, res) => {
-  res.render('login');
+
+app.use((req, res, next) => {
+  if (req.cookies.usid && !req.session.user) {
+    res.clearCookie('usid');
+  }
+  next();
+});
+//log
+app.use((req, res, next) => {
+  console.log('cookies ======>', req.cookies);
+  console.log('session ======>', req.session);
+
+  next();
 });
 
-app.post('/chat', (req, res) => {
-  let a = req.body;
-  console.log(a);
-  res.render('chat', req.body)
+app.post('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/');
 });
 
 server.listen(port, () => {
