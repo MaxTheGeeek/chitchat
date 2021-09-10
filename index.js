@@ -29,11 +29,9 @@ app.use(cookieParser());
 
 app.use(
   session({
-    key: 'usid',
     secret: config.sessionSecret,
-    resave: false,
+    resave: true,
     saveUninitialized: false,
-    cookie: { secure: true, maxAge: 2 * 60 * 60 * 1000, sameSite: true },
   })
 );
 
@@ -42,16 +40,19 @@ app.set('view engine', 'ejs');
 
 // routes
 app.use(authRoutes);
+app.use(chatRoutes);
 
-app.use((req, res, next) => {
-  if (req.cookies.usid && !req.session.user) {
-    res.clearCookie('usid');
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   if (req.cookies.usid && !req.session.user) {
+//     res.clearCookie('usid');
+//   }
+//   next();
+// });
+
+
 //log
 app.use((req, res, next) => {
-  console.log('cookies ======>', req.cookies);
+  // console.log('cookies ======>', req.cookies);
   console.log('session ======>', req.session);
 
   next();

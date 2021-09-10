@@ -1,4 +1,8 @@
-const socket = io();
+// Options
+const username = document.getElementById('myUsername').innerHTML;
+const room = document.getElementById('myRoom').innerHTML;
+
+socket = io({ query: `username=${username}` });
 
 // Elements
 const $messageForm = document.querySelector('#message-form');
@@ -9,15 +13,12 @@ const $messages = document.querySelector('#messages');
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML;
+
 const locationMessageTemplate = document.querySelector(
   '#location-message-template'
 ).innerHTML;
 const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML;
 const chitchatTitle = document.querySelector('#chitchat-title').innerHTML;
-
-// Options
-const username = document.getElementById('myUsername').innerHTML;
-const room = document.getElementById('myRoom').innerHTML;
 
 // Auto scrolling
 const autoscroll = () => {
@@ -49,8 +50,14 @@ socket.on('message', (message) => {
     username: message.username,
     message: message.text,
     userId: message.userId,
+    selfDisplay:
+      message.username === username ? 'displayBlock my-msg' : 'desplayNone',
+    otherDisplay:
+      message.username !== username ? 'displayBlock' : 'desplayNone',
     createdAt: moment(message.createdAt).format('h:mm a'),
   });
+
+  console.log(html);
   $messages.insertAdjacentHTML('beforeend', html);
   autoscroll();
 });
@@ -94,7 +101,7 @@ $messageForm.addEventListener('submit', (e) => {
     if (error) {
       return console.log(error);
     }
-
+    $messages.insertAdjacentHTML('beforeend', 'delivered');
     console.log('Message delivered!');
   });
 });

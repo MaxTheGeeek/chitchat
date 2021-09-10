@@ -3,10 +3,9 @@ const chatController = require('../controllers/chatController');
 
 const router = Router();
 
-router.get('/chat', chatController.chat_get);
-
 router.get('/index', (req, res) => {
-  res.render('index');
+  console.log('index', req.session.user);
+  res.render('index', { username: req.session.user.username });
 });
 
 router.post('/index', (req, res) => {
@@ -19,6 +18,16 @@ router.post('/index', (req, res) => {
 
 router.post('/chat', (req, res) => {
   res.render('chat', req.body);
+});
+
+router.get('/chat', (req, res) => {
+  const { user } = req.session;
+  console.log(req.query.room);
+  console.log(user);
+  res.render('chat', {
+    username: req.query.username,
+    room: req.query.room,
+  });
 });
 
 module.exports = router;

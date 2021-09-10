@@ -1,6 +1,6 @@
 // const User = require('../Models/User');
 const url = require('url');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const generalTools = require('../tools/general-tools');
 
 

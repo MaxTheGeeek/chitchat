@@ -13,6 +13,7 @@ const {
 
 io.on('connection', (socket) => {
   console.log('New WebSocket connection');
+  console.log(socket.handshake.query.username);
 
   socket.on('join', (options, callback) => {
     const { error, user } = addUser({ id: socket.id, ...options });
@@ -23,13 +24,10 @@ io.on('connection', (socket) => {
 
     socket.join(user.room);
 
-    socket.emit('message', generateMessage('Admin', 'Welcome!'));
+    // socket.emit('message', generateMessage('Admin', 'Welcome!'));
     socket.broadcast
       .to(user.room)
-      .emit(
-        'message',
-        generateMessage('Admin', `${user.username} has joined!`)
-      );
+      .emit('status', generateMessage('', `${user.username} joined!`));
     io.to(user.room).emit('roomData', {
       room: user.room,
       users: getUsersInRoom(user.room),
@@ -61,8 +59,8 @@ io.on('connection', (socket) => {
 
     if (user) {
       io.to(user.room).emit(
-        'message',
-        generateMessage('Admin', `${user.username} left!`)
+        'status',
+        generateMessage('', `${user.username} left!`)
       );
       io.to(user.room).emit('roomData', {
         room: user.room,

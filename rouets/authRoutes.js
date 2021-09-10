@@ -1,7 +1,11 @@
 const { Router } = require('express');
+const { Request } = require('express');
+const { session } = require('express-session');
 const User = require('../Models/user');
 const url = require('url');
-const bcrypt = require('bcrypt');
+const path = require('path');
+
+// const bcrypt = require('bcrypt');
 const generalTools = require('../tools/general-tools');
 
 const router = Router();
@@ -13,8 +17,8 @@ const router = Router();
 
 //GET register routes
 
-router.get('/register', generalTools.sessionChecker, async (req, res) => {
-  res.render('register', { msg: req.query.msg });
+router.get('/', generalTools.sessionChecker, async (req, res) => {
+  res.render('login', { msg: req.query.msg });
 });
 
 //POST register routes
@@ -28,7 +32,7 @@ router.post('/register', generalTools.sessionChecker, async (req, res) => {
     if (existUser) {
       return res.redirect(
         url.format({
-          pathname: '/register',
+          pathname: '/',
           query: {
             msg: 'Username Already Exist :(',
           },
@@ -100,9 +104,11 @@ router.post('/login', (req, res) => {
       );
     }
 
-    // req.session.user = user;
+    req.session.user = user;
 
-    res.redirect('/index', { username: user.username });
+    console.log('/login', req.session.user);
+
+    res.redirect('/index');
   });
 });
 module.exports = router;

@@ -14,8 +14,8 @@
   </head>
 
   <body>
-    <span style="display: none" id="myUsername"> <%= username %> </span>
-    <span style="display: none" id="myRoom"> <%= room %> </span>
+    <span style="display: none" id="myUsername"><%= username %></span>
+    <span style="display: none" id="myRoom"><%= room %></span>
     <div id="chatContainer" class="chat">
       <div id="sidebar" class="chat__sidebar bg-dark">
         <div class="sidebar-box"></div>
@@ -28,11 +28,13 @@
             <img src="img/menu.svg" alt="menu" />
           </a>
           <P id="chitchat" class="text-info"> <%= room %> </P>
-          <form action="/logout" method="post">
-          <button>logout</button>
+          <form class="logout-form" action="/logout" method="post">
+            <button>
+              <img src="img/logout (2).svg" />
+            </button>
           </form>
         </div>
-        <div id="messages" class="chat__messages"></div>
+        <div id="messages" class="chat__messages w-100"></div>
         <div class="compose">
           <form id="message-form">
             <input
@@ -54,22 +56,39 @@
     </div>
 
     <script id="message-template" type="text/html">
-      <div class="message">
-        <p>
-          <img class="rounded-pill" src="/img/avatar-2.jpg" alt="avatar" />
+      <div class="message {{ selfDisplay }} w-100">
+        <div>
           <span class="message__name text-warning">{{ username }}</span>
-          <span class="message__meta">{{createdAt}}</span>
-        </p>
-        <p class="bg-primary rounded w-25 text-light pl-3 py-3">{{message}}</p>
+        </div>
+        <div
+          class="bg-primary rounded w-25 text-light pl-3 py-3 mr-4"
+          id="selfMessage"
+        >
+          {{message}}
+        </div>
+        <span class="message__meta mr-4">{{createdAt}}</span>
+      </div>
+      <div class="message {{ otherDisplay}} w-100">
+        <div>
+          <span class="message__name text-warning">{{ username }}</span>
+        </div>
+        <div
+          class="bg-primary rounded w-25 text-light pl-3 py-3 ml-4"
+          id="otherMessage"
+        >
+          {{message}}
+        </div>
+        <span class="message__meta ml-4">{{createdAt}}</span>
       </div>
     </script>
 
     <script id="location-message-template" type="text/html">
-      <div class="message">
-        <p>
-          <img class="rounded-pill" src="img/avatar-2.jpg" alt="avatar" />
-          <span class="message__name text-warning"><%= username %> </span>
-          <span class="message__meta"> {{createdAt}} </span>
+      <div class="message w-100">
+        <p class="d-flex flex-column justify-content-lg-center align-items-lg-end">
+          <span class="message__name text-warning float-right"
+            ><%= username %>
+          </span>
+          <span class="message__meta float-right"> {{createdAt}} </span>
         </p>
         <p id="map-box">
           <a

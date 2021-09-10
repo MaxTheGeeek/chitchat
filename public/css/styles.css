@@ -1,4 +1,21 @@
 /* General Styles */
+.desplayNone {
+  display: none;
+}
+.desplayBlock::after{
+  margin-left: 500px !important;
+}
+.displayBlock {
+  display: flex;
+  flex-direction:column;
+}
+
+.my-msg {
+display: flex;
+justify-content: flex-end;
+align-items: flex-end;
+
+}
 
 * {
   margin: 0;
@@ -35,16 +52,6 @@ input {
   border: 1px solid #eeeeee;
   padding: 12px;
   outline: none;
-}
-
-button {
-  cursor: pointer;
-  padding: 12px;
-  background: #7c5cbf;
-  border: none;
-  color: white;
-  font-size: 16px;
-  transition: background 0.3s ease;
 }
 
 
@@ -383,4 +390,25 @@ background: rgb(219, 219, 219);
     height: 25px;
     float: left;
     margin: 12px 0 12px 10px;
+  }
+
+  #chitchat-box .logout-form {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 45px;
+    height: 45px;
+    background:transparent;
+    border: none;
+  }
+  #chitchat-box .logout-form button{
+    background:transparent;
+    border: none;
+    padding-top: 5px;
+  }
+  #chitchat-box .logout-form img{
+    width: 25px;
+    height: 25px;
+    background:transparent;
+    border: none;
   }
