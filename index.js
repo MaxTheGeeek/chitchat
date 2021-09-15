@@ -37,7 +37,6 @@ app.use(
 
 //View engine
 app.set('view engine', 'ejs');
-
 // routes
 app.use(authRoutes);
 app.use(chatRoutes);
@@ -49,14 +48,16 @@ app.use(chatRoutes);
 //   next();
 // });
 
-
 //log
-app.use((req, res, next) => {
-  // console.log('cookies ======>', req.cookies);
-  console.log('session ======>', req.session);
+// app.use((req, res, next) => {
+//   // console.log('cookies ======>', req.cookies);
+//   console.log('session ======>', req.session);
 
-  next();
-});
+//   next();
+// });
+// app.get('/call', (req, res, next) => {
+//   res.render('videoCall');
+// });
 
 app.post('/logout', (req, res) => {
   req.session.destroy();

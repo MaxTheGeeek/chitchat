@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Videosdk.live RTC</title>
+  </head>
+  <body>
+    <script src="https://sdk.videosdk.live/rtc-js-prebuilt/0.1.1/rtc-js-prebuilt.js"></script>
+    <script>
+      // Initialize the factory function
+      const meeting = new VideoSDKMeeting();
+
+      // Set apikey, meetingId and participant name
+      const apiKey = '2879ecb5-0cb6-452a-808b-eb48507ae895'; // generated from app.videosdk.live
+      const meetingId = 'milkyway';
+      const name = 'max';
+
+      const config = {
+        name: name,
+        apiKey: apiKey,
+        meetingId: meetingId,
+
+        containerId: null,
+        redirectOnLeave: 'https://www.videosdk.live/',
+
+        micEnabled: true,
+        webcamEnabled: true,
+        participantCanToggleSelfWebcam: true,
+        participantCanToggleSelfMic: true,
+
+        chatEnabled: true,
+        screenShareEnabled: true,
+        pollEnabled: true,
+        whiteBoardEnabled: true,
+        raiseHandEnabled: true,
+
+        recordingEnabled: true,
+        recordingWebhookUrl: 'https://www.videosdk.live/callback',
+        participantCanToggleRecording: true,
+
+        brandingEnabled: true,
+        brandLogoURL: 'https://picsum.photos/200',
+        brandName: 'Awesome startup',
+      };
+
+      meeting.init(config);
+    </script>
+  </body>
+</html>
