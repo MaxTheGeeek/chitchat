@@ -6,18 +6,23 @@ const db = require('./config/db');
 const ejs = require('ejs');
 const authRoutes = require('./rouets/authRoutes');
 const chatRoutes = require('./rouets/chatRoutes');
+const profileRoutes = require('./rouets/profileRoutes');
 const io = require('./rouets/io');
 const config = require('./config/config');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const res = require('express/lib/response');
-
+//run express
 const app = express();
+//create server and run app on server
 const server = http.createServer(app);
-io.attach(server);
 
+//attach io and run socket.io on server
+io.attach(server);
+//config env or direct port
 const port = process.env.PORT || 3000;
+//static folder join
 const publicDirectoryPath = path.join(__dirname, 'public');
 
 //middlewares
@@ -32,6 +37,7 @@ app.use(
     secret: config.sessionSecret,
     resave: true,
     saveUninitialized: false,
+    maxAge: 600000,
   })
 );
 
@@ -40,6 +46,7 @@ app.set('view engine', 'ejs');
 // routes
 app.use(authRoutes);
 app.use(chatRoutes);
+app.use(profileRoutes);
 
 // app.use((req, res, next) => {
 //   if (req.cookies.usid && !req.session.user) {
@@ -49,12 +56,12 @@ app.use(chatRoutes);
 // });
 
 //log
-// app.use((req, res, next) => {
-//   // console.log('cookies ======>', req.cookies);
-//   console.log('session ======>', req.session);
+app.use((req, res, next) => {
+  console.log('cookies ======>', req.cookies);
+  console.log('session ======>', req.session);
 
-//   next();
-// });
+  next();
+});
 // app.get('/call', (req, res, next) => {
 //   res.render('videoCall');
 // });

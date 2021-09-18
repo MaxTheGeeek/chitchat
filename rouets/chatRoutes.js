@@ -1,11 +1,11 @@
 const { Router } = require('express');
-const chatController = require('../controllers/chatController');
 
 const router = Router();
 
 router.get('/index', (req, res) => {
-  console.log('index', req.session.user);
-  res.render('index', { username: req.session.user.username });
+  const { user } = req.session;
+  console.log('index', user);
+  res.render('index', { username: user.username });
 });
 
 router.post('/index', (req, res) => {
@@ -22,12 +22,16 @@ router.post('/chat', (req, res) => {
 
 router.get('/chat', (req, res) => {
   const { user } = req.session;
-  console.log(req.query.room);
-  console.log(user);
+  console.log(req.session);
+  console.log(req.query);
   res.render('chat', {
-    username: req.query.username,
+    username: req.session.user.username,
     room: req.query.room,
   });
+});
+
+router.get('/videocall', (req, res) => {
+  res.render('videoCall');
 });
 
 module.exports = router;

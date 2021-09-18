@@ -10,6 +10,7 @@ const $messageFormInput = $messageForm.querySelector('input');
 const $messageFormButton = $messageForm.querySelector('button');
 const $sendLocationButton = document.querySelector('#send-location');
 const $messages = document.querySelector('#messages');
+const typing = document.querySelector('#typing');
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML;
@@ -44,6 +45,8 @@ const autoscroll = () => {
   }
 };
 
+
+
 socket.on('message', (message) => {
   console.log(message);
   const html = Mustache.render(messageTemplate, {
@@ -61,6 +64,12 @@ socket.on('message', (message) => {
   $messages.insertAdjacentHTML('beforeend', html);
   autoscroll();
 });
+
+//  $messages.addEventListener('keydown', (e) => {
+//    if ($messages.value.length !== 0) {
+//      socket.emit('message', 'typing');
+//    }
+//  });
 
 socket.on('userCount', function (data) {
   console.log(data.userCount);
@@ -80,6 +89,10 @@ socket.on('locationMessage', (message) => {
   const html = Mustache.render(locationMessageTemplate, {
     username: message.username,
     url: message.url,
+    selfDisplay:
+      message.username === username ? 'displayBlock my-msg ' : 'desplayNone',
+    otherDisplay:
+      message.username !== username ? 'displayBlock' : 'desplayNone',
     createdAt: moment(message.createdAt).format('h:mm a'),
   });
   $messages.insertAdjacentHTML('beforeend', html);
@@ -93,6 +106,13 @@ $messageForm.addEventListener('submit', (e) => {
 
   const message = e.target.elements.message.value;
 
+
+//if message box in empty
+  if (message === '') {
+    return $messageFormButton.removeAttribute('disabled');
+  }
+
+  //else
   socket.emit('sendMessage', message, (error) => {
     $messageFormButton.removeAttribute('disabled');
     $messageFormInput.value = '';
@@ -102,7 +122,8 @@ $messageForm.addEventListener('submit', (e) => {
       return console.log(error);
     }
     $messages.insertAdjacentHTML('beforeend', 'delivered');
-    console.log('Message delivered!');
+
+    // console.log('Message delivered!');
   });
 });
 

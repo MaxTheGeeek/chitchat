@@ -1,4 +1,5 @@
 const io = require('socket.io')();
+const session = require('express-session');
 
 const {
   generateMessage,
@@ -17,12 +18,12 @@ io.on('connection', (socket) => {
 
   socket.on('join', (options, callback) => {
     const { error, user } = addUser({ id: socket.id, ...options });
-
     if (error) {
       return callback(error);
     }
 
     socket.join(user.room);
+ 
 
     // socket.emit('message', generateMessage('Admin', 'Welcome!'));
     socket.broadcast
@@ -34,6 +35,8 @@ io.on('connection', (socket) => {
     });
     callback();
   });
+
+
 
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);

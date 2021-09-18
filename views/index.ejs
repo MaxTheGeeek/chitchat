@@ -7,25 +7,23 @@
       <div class="centered-form__box">
         <form action="/chat" method="GET">
           <div class="col-12 text-center">
-            <h5>Display name:</h5>
-            <p
+            <h5 class="text-secondary">Display name:</h5>
+            <h3
               class="text-center text-warning text-capitalize font-weight-bold"
             >
               <%= username %>
-            </p>
+            </h3>
           </div>
-          <h5 class="mb-2">Display name:</h5>
           <input
             class="text-light rounded-pill my-3"
             type="hidden"
             name="username"
             value="<%= username %> "
-            
             placeholder="Display name"
             autocomplete="off"
             required
           />
-          <h5 class="mb-2">Please select your room</h5>
+          <p class="mb-2 text-secondary text-center">Please select your room</p>
           <input
             class="text-light rounded-pill my-3"
             type="text"

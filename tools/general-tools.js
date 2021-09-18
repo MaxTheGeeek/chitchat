@@ -4,7 +4,7 @@ const multer = require('multer');
 let generalTools = {};
 
 generalTools.sessionChecker = (req, res, next) => {
-  if (req.session.user && req.cookies.usid) {
+  if (req.session.user && req.cookies.connect.sid) {
     res.redirect('index', { username: req.session.user.username });
   } else {
     next();
