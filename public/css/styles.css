@@ -125,7 +125,7 @@ button:disabled {
   height: 100vh;
   color: white;
   background: #474749;
-  width: 300px;
+  width: 0;
   overflow-y: scroll;
   overflow-x: hidden;
   z-index: 10;
@@ -133,16 +133,16 @@ button:disabled {
 }
 
 .sidebar-box {
-  width: 99%;
+  width: 100%;
   height: 100vh;
   border-radius: 12px;
-  margin: 0;
   background: #292931;
 }
 
 /* Chat styles */
 
 .chat__main {
+  width: 0;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -150,10 +150,10 @@ button:disabled {
 }
 
 .chat__main #chitchat-box {
-  border: 1px solid rgb(88, 88, 88);
+  border-bottom: 1px solid rgb(88, 88, 88);
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  height: 50px;
+  height: 80px;
 }
 
 .chat__main #chitchat-box #chitchat {
@@ -163,7 +163,7 @@ button:disabled {
 
 .chat__messages {
   width: 100%;
-  height: 89vh;
+  height: 85vh;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   background: #292931;
@@ -181,7 +181,7 @@ button:disabled {
 .message__name {
   font-weight: 600;
   font-size: 14px;
-  margin-right: 8px;
+  margin: 0;
 }
 
 .message__meta {
@@ -262,18 +262,19 @@ button:disabled {
   width: 30px;
   height: 30px;
 }
+
+#location-username {
+  margin: 0;
+}
 .message img {
   width: 50px;
   height: 50px;
 }
 #map-box {
   margin: 0;
-  border-bottom: 1px solid rgb(36, 105, 231);
 }
 
 .message #map-box a {
-  outline-style: none;
-  color: #333;
   margin: 0;
 }
 
@@ -311,9 +312,9 @@ button:disabled {
 }
 
 .room-title {
-  height: 60px;
+  height: 70px;
   color: #fffccb;
-  border: 1px solid #666964;
+  border-bottom: 1px solid #666964;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   border-bottom: none;
@@ -400,7 +401,7 @@ button:disabled {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 70px !important;
+  height: 100px !important;
   background: #292931;
   margin-right: 15px;
 }
@@ -512,4 +513,11 @@ button:disabled {
     right: 5px !important; */
     transform: translate(-50px, 10px) !important;
   }
+}
+
+.hidden {
+  display: none !important;
+}
+.show {
+  width: 100% !important;
 }
