@@ -1,3 +1,4 @@
 module.exports = {
-  sessionSecret: 'MAXbeh23423456tyvienna2021iran',
+  sessionSecret: process.env.SESSION_SECRET,
+  mongoUri: process.env.MONGO_URI
 };
