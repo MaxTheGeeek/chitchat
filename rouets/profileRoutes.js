@@ -21,25 +21,25 @@ router.post('/avatar', (req, res) => {
       res.status(404).send(err.message);
     } else {
       User.findByIdAndUpdate(
-        req.session.user._id,
+        req.body.user._id,
         { avatar: req.file.filename },
         { new: true },
         (err, user) => {
           if (err) {
             res.status(500).json({ msg: 'Server Error!' });
           } else {
-            if (req.session.user.avatar) {
+            if (req.body.user.avatar) {
               fs.unlink(
                 path.join(
                   __dirname,
-                  '../public/images/avatars',
-                  req.session.user.avatar
+                  '../public/img/avatars',
+                  req.body.user.avatar
                 ),
                 (err) => {
                   if (err) {
                     res.status(500).json({ msg: 'Server Error!' });
                   } else {
-                    req.session.user = user;
+                    req.body.user = user;
 
                     res.redirect('/user/profile');
                   }

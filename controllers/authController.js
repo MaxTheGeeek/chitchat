@@ -1,62 +1,120 @@
-// const User = require('../Models/User');
+exports.renderLogin = async (req, res) => {
+  res.render('login', {
+    msg: req.query.msg,
+  });
+};
+const User = require('../Models/user');
 const url = require('url');
-// const bcrypt = require('bcrypt');
-const generalTools = require('../tools/general-tools');
+const path = require('path');
 
+exports.postRegister = async (req, res) => {
+  User.findOne(
+    {
+      username: req.session.user.username.trim(),
+    },
+    (err, existUser) => {
+      if (err)
+        return res.redirect(
+          url.format({
+            pathname: '/register',
+            query: {
+              err: 'Server error',
+            },
+          })
+        );
 
+      if (existUser) {
+        return res.redirect(
+          url.format({
+            pathname: '/',
+            query: {
+              msg: 'Username Already Exist :(',
+            },
+          })
+        );
+      }
+    }
+  );
 
+  const { username, email, password } = req.body;
+  if (req.body.username && req.body.email && req.body.password) {
+    const user = User.create({
+      username,
+      email,
+      password,
+    });
+    return res.redirect(
+      url.format({
+        pathname: '/login',
+        query: {
+          msg: 'Please login to app',
+        },
+      })
+    );
+  }
+};
 
+exports.getRegister = (req, res) => {
+  res.render('register');
+};
 
-//Register Requests
-// module.exports.register_get = (req, res) => {
-//   if (req.cookies.usid) {
-//     return res.render('login');
-//   }
-//   res.render('register');
-// }; 
+exports.getLogin = (req, res) => {
+  res.render('login');
+};
 
+exports.postLogin = (req, res) => {
+  if (!req.body.username || !req.body.password) {
+    return res.redirect(
+      url.format({
+        pathname: '/login',
+        query: {
+          msg: 'Empty Field :(',
+        },
+      })
+    );
+  }
 
+  User.findOne(
+    {
+      username: req.body.username,
+    },
+    (err, user) => {
+      if (err) {
+        return res.redirect(
+          url.format({
+            pathname: '/login',
+            query: {
+              msg: 'Server Error :(',
+            },
+          })
+        );
+      }
+      if (!user) {
+        return res.redirect(
+          url.format({
+            pathname: '/login',
+            query: {
+              msg: 'User Not Found :(',
+            },
+          })
+        );
+      }
+      if (!req.body.password === user.password) {
+        return res.redirect(
+          url.format({
+            pathname: '/login',
+            query: {
+              msg: 'User Not Found :(',
+            },
+          })
+        );
+      }
 
-// module.exports.register_post = (req, res) => {
-//   const { username, email, password } = req.body;
+      req.session.user = user;
 
-//   if (req.cookies.usid && req.session.key) {
-//     return res.render('login');
-//   }
-//   try {
-//     const user = await User.create({ username, email, password });
-//     res.render('login');
-//   } catch (err) {
-//     console.log(err);
-//     res.status(404).send('There is an error');
-//   }
-// };
+      console.log('/login', req.session.user);
 
-//Login request
-
-// module.exports.login_get = (req, res) => {
-//   if (req.cookies.usid) {
-//     return res.render('login');
-//   }
-
-//   res.render('register');
-// };
-
-// module.exports.login_post = async (req, res) => {
-//   const { username, password } = req.body;
-//   console.log(req.body);
-//   try {
-//     const user = await User.findOne({ username, password });
-//     res.render('index', { username });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(404).send('There is an error');
-//   }
-// };
-
-// module.exports.chat_post = async (req, res) => {
-//   if (!req.session.user || !req.cookies.user_sid) {
-//     return res.redirect('login');
-//   }
-//   res.render('chat', req.body);
-// };
+      res.redirect('/index');
+    }
+  );
+};
