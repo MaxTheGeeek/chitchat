@@ -5,9 +5,11 @@ const ejs = require('ejs');
 const path = require('path');
 const config = require('./config/config');
 
-const authRoutes = require('./rouets/authRoutes');
-const chatRoutes = require('./rouets/chatRoutes');
-const profileRoutes = require('./rouets/profileRoutes');
+const {
+  authRoutes,
+  chatRoutes,
+  profileRoutes
+} = require('./rouets');
 
 const app = express();
 
@@ -16,35 +18,41 @@ app.set('view engine', 'ejs');
 const publicDirectoryPath = path.join(__dirname, 'public');
 app.use(express.static(publicDirectoryPath));
 app.use(express.json());
-app.use(express.urlencoded({
-    extended: false
-}));
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
 app.use(cookieParser());
 app.use(
-    session({
-        secret: config.sessionSecret,
-        resave: true,
-        saveUninitialized: false,
-        maxAge: 600000,
-    })
+  session({
+    secret: config.sessionSecret,
+    resave: true,
+    saveUninitialized: false,
+    maxAge: 600000,
+  })
 );
 
 app.use((req, res, next) => {
-    console.log('cookies ======>', req.cookies);
-    console.log('session ======>', req.session);
+  console.log('cookies ======>', req.cookies);
+  console.log('session ======>', req.session);
 
-    next();
+  next();
 });
+
+
 
 app.use(authRoutes);
 app.use(chatRoutes);
 app.use(profileRoutes);
 
 app.post('/logout', (req, res) => {
-    req.session.destroy();
-    res.redirect('/');
+  req.session.destroy();
+  res.redirect('/');
 });
 
-// TODO: 404 error
+app.all('*', (req, res, ) => {
+  res.status(404).render('404');
+});
 
 module.exports = app;
