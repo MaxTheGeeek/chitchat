@@ -230,11 +230,13 @@ button:disabled {
 
 .compose button {
   font-size: 14px;
+  border-left: 1px solid rgb(199, 199, 199);
 }
 .compose button img {
   width: 30px;
   height: 30px;
   margin-right: 10px;
+  
 }
 
 /* Chat Sidebar Styles */

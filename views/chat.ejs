@@ -36,7 +36,7 @@
           </div>
           <div id="chat-user">
             <img src="/img/avatar-2.jpg" alt="avatar" />
-            <Span class="text-warning text-capitalize username-title"
+            <Span class="text-success text-capitalize username-title"
               ><%= username %></Span
             >
           </div>
@@ -83,10 +83,10 @@
                 placeholder="Message"
                 autocomplete="off"
               />
-              <button class="btn rounded-circle">
+              <button class="btn pl-3">
                 <img src="img/send-green.svg" alt="" />
               </button>
-              <button class="btn rounded-circle" id="send-location">
+              <button class="btn" id="send-location">
                 <img src="img/pin.svg" alt="btn-location" />
               </button>
             </div>
@@ -105,7 +105,9 @@
       </div>
       <div class="message {{ otherDisplay}} w-100">
         <div>
-          <span class="message__name text-warning text-capitalize">{{ username }}</span>
+          <span class="message__name text-warning text-capitalize"
+            >{{ username }}</span
+          >
         </div>
         <div class="bg-success text-light p-3" id="otherMessage">
           {{message}}
@@ -116,7 +118,9 @@
 
     <script id="location-message-template" type="text/html">
       <div class="message {{selfDisplay}} w-100">
-        <p id="location-username" class="text-warning text-capitalize"><%= username %></p>
+        <p id="location-username" class="text-warning text-capitalize">
+          <%= username %>
+        </p>
         <p id="map-box">
           <a
             class="btn btn-outline-warning ml-2"
