@@ -1,6 +1,7 @@
 const io = require('socket.io')();
 const session = require('express-session');
 
+
 const {
   generateMessage,
   generateLocationMessage,
@@ -23,7 +24,6 @@ io.on('connection', (socket) => {
     }
 
     socket.join(user.room);
- 
 
     // socket.emit('message', generateMessage('Admin', 'Welcome!'));
     socket.broadcast
@@ -38,6 +38,7 @@ io.on('connection', (socket) => {
 
 
 
+  //message event
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);
 

@@ -36,9 +36,7 @@
           </div>
           <div id="chat-user">
             <img src="/img/avatar-2.jpg" alt="avatar" />
-            <Span class="text-success text-capitalize username-title"
-              ><%= username %></Span
-            >
+            <Span class="text-capitalize username-title"><%= username %></Span>
           </div>
           <div id="logout-form">
             <div class="logout-form mr-3">
@@ -164,7 +162,7 @@
           <img src="/img/avatar-2.jpg" alt="avatar" />
           {{username}}
           <span class="badge badge-success badge-pill">online</span>
-          <a href="/videocall">
+          <a id="call-btn" href="/videocall">
             <img class="camera" src="/img/camera.svg" alt="videocall" />
           </a>
         </li>

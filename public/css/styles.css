@@ -77,7 +77,7 @@ button:disabled {
 /* Join Page Styles */
 
 .centered-form {
-  background: #202025;
+  background: #181f2c;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -86,8 +86,8 @@ button:disabled {
 }
 
 .centered-form__box {
-  box-shadow: 1px 0px 15px 1px #b4b5b8;
-  background: #292931;
+  box-shadow: 0 0 11px #7189a3;
+  background: #24282e;
   padding: 24px;
   width: 400px;
   border-radius: 12px;
@@ -100,10 +100,11 @@ button:disabled {
 .centered-form button {
   width: 100%;
   height: 50px;
+  background: rgb(104, 200, 238);
 }
 
 .centered-form button:hover {
-  box-shadow: 0px 1px 15px 5px #b2dceb;
+  background: rgb(45, 147, 187);
 }
 
 .centered-form input {
@@ -136,7 +137,7 @@ button:disabled {
   width: 100%;
   height: 100vh;
   border-radius: 12px;
-  background: #292931;
+  background: #161d29;
 }
 
 /* Chat styles */
@@ -166,7 +167,7 @@ button:disabled {
   height: 85vh;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
-  background: #292931;
+  background: #161d29;
   flex-grow: 1;
   overflow-y: scroll;
   padding: 12px 24px 0 24px;
@@ -203,7 +204,7 @@ button:disabled {
   padding: 24px;
   width: 100%;
   border-radius: 12px;
-  background: #292931;
+  background: #1d2635;
 }
 
 .compose form {
@@ -236,7 +237,6 @@ button:disabled {
   width: 30px;
   height: 30px;
   margin-right: 10px;
-  
 }
 
 /* Chat Sidebar Styles */
@@ -320,7 +320,7 @@ button:disabled {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   border-bottom: none;
-  background: #292931;
+  background: #1d2635;
   text-transform: capitalize;
   position: relative;
 }
@@ -404,7 +404,7 @@ button:disabled {
   justify-content: space-between;
   align-items: center;
   height: 100px !important;
-  background: #292931;
+  background: #1d2635;
   margin-right: 15px;
 }
 
@@ -464,6 +464,7 @@ button:disabled {
 #chitchat-box #chat-user .username-title {
   font-size: 22px;
   margin-left: 10px;
+  color: rgb(176, 221, 140);
 }
 .logout-form {
   position: relative;

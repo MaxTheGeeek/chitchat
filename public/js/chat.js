@@ -10,7 +10,7 @@ const $messageFormInput = $messageForm.querySelector('input');
 const $messageFormButton = $messageForm.querySelector('button');
 const $sendLocationButton = document.querySelector('#send-location');
 const $messages = document.querySelector('#messages');
-const typing = document.querySelector('#typing');
+const callBtn = document.querySelector('#call-btn');
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML;
@@ -45,8 +45,6 @@ const autoscroll = () => {
   }
 };
 
-
-
 socket.on('message', (message) => {
   console.log(message);
   const html = Mustache.render(messageTemplate, {
@@ -65,11 +63,9 @@ socket.on('message', (message) => {
   autoscroll();
 });
 
-//  $messages.addEventListener('keydown', (e) => {
-//    if ($messages.value.length !== 0) {
-//      socket.emit('message', 'typing');
-//    }
-//  });
+
+
+
 
 socket.on('userCount', function (data) {
   console.log(data.userCount);
@@ -106,8 +102,7 @@ $messageForm.addEventListener('submit', (e) => {
 
   const message = e.target.elements.message.value;
 
-
-//if message box in empty
+  //if message box in empty
   if (message === '') {
     return $messageFormButton.removeAttribute('disabled');
   }
@@ -126,6 +121,8 @@ $messageForm.addEventListener('submit', (e) => {
     // console.log('Message delivered!');
   });
 });
+
+
 
 $sendLocationButton.addEventListener('click', () => {
   if (!navigator.geolocation) {

@@ -1,5 +1,5 @@
 body {
-  background: #303138;
+  background: #161d29;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -121,8 +121,8 @@ label {
 }
 
 .login-box {
-  box-shadow: 1px 0px 15px 1px #444447;
-  background: #27282c;
+  box-shadow: 0px 0px 10px #aeb5c7;
+  background: #24282e;
   padding: 24px;
   width: 600px;
   border-radius: 12px;
