@@ -29,4 +29,5 @@ WIFI - final project<br/>
 <li>24.08.2021 = 5 hrs/ </li>  
 <li>25.08 - 31.08 = 35 hrs/</li>    
 <li>01-09 - 06.09 = 25 hrs/ </li>   
+<li>07-09 - 22.09 = 100 hrs - only video call/ </li>   
 </ul>
