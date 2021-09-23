@@ -34,10 +34,6 @@ navigator.mediaDevices
       call.on('stream', (userVideoStream) => {
         addVideoStream(video, userVideoStream);
       });
-      call.close(stream);
-      conn.on('close', () => {
-        console.log('stop call');
-      });
     });
 
     socket.on('user-connected', (userId) => {
@@ -50,6 +46,9 @@ const connectToNewUser = (userId, stream) => {
   const video = document.createElement('video');
   call.on('stream', (userVideoStream) => {
     addVideoStream(video, userVideoStream);
+  });
+  call.on('close', () => {
+    video.remove();
   });
 };
 
