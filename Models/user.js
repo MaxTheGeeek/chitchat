@@ -46,9 +46,9 @@ const UserSchema = new Schema({
     enum: ['admin', 'user'],
     default: 'user',
   },
-  // avatar: {
-  //   type: String,
-  // },
+  avatar: {
+    type: String,
+  },
 });
 
 // UserSchema.pre('save', (next) => {

@@ -63,9 +63,10 @@ socket.on('message', (message) => {
   autoscroll();
 });
 
-
-
-
+socket.on('call', (data) => {
+  console.log(data);
+  window.open('http://localhost:3000/' + data.roomId, '_blank');
+});
 
 socket.on('userCount', function (data) {
   console.log(data.userCount);
@@ -122,7 +123,9 @@ $messageForm.addEventListener('submit', (e) => {
   });
 });
 
-
+callBtn.addEventListener('click', () => {
+  socket.emit('callRequest');
+});
 
 $sendLocationButton.addEventListener('click', () => {
   if (!navigator.geolocation) {

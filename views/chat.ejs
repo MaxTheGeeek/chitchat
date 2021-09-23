@@ -82,10 +82,13 @@
                 autocomplete="off"
               />
               <button class="btn pl-3">
-                <img src="img/send-green.svg" alt="" />
+                <img src="img/send-telegram.png" alt="" />
               </button>
               <button class="btn" id="send-location">
                 <img src="img/pin.svg" alt="btn-location" />
+              </button>
+              <button id="call-btn" class="btn" id="send-location">
+                <img src="img/phone.svg" alt="btn-location" />
               </button>
             </div>
           </form>
@@ -162,9 +165,9 @@
           <img src="/img/avatar-2.jpg" alt="avatar" />
           {{username}}
           <span class="badge badge-success badge-pill">online</span>
-          <a id="call-btn" href="/videocall">
+          <!-- <div id="call-btn">
             <img class="camera" src="/img/camera.svg" alt="videocall" />
-          </a>
+          </div> -->
         </li>
 
         {{/users}}

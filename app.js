@@ -6,20 +6,26 @@ const path = require('path');
 const config = require('./config/config');
 const { v4: uuidv4 } = require('uuid');
 
-const {
-  authRoutes,
-  chatRoutes,
-  profileRoutes,
-  peerRoutes,
-} = require('./rouets');
+const { ExpressPeerServer } = require('peer');
+
+const { authRoutes, chatRoutes, profileRoutes } = require('./rouets');
 
 const app = express();
+
+const PORT = process.env.PORT || 3000;
+const server = app.listen(PORT, () =>
+  console.log(`Server is up on port ${PORT}!`)
+);
+
+const peerServer = ExpressPeerServer(server, {
+  debug: true,
+});
 
 app.set('view engine', 'ejs');
 
 const publicDirectoryPath = path.join(__dirname, 'public');
+app.use('/peerjs', peerServer);
 app.use(express.static(publicDirectoryPath));
-
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -43,21 +49,19 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(authRoutes);
-app.use(chatRoutes);
-app.use(profileRoutes);
-// app.use(peerRoutes);
-
-// app.use('/peerjs', (req, res, next) => {
-//   res.send(peerServer);
-//   next();
-// });
-app.get('/videocall', (req, res) => {
+app.get('/meeting', (req, res, next) => {
   res.redirect(`/${uuidv4()}`);
 });
 
+app.use(authRoutes);
+app.use(chatRoutes);
+app.use(profileRoutes);
+
 app.get('/:room', (req, res) => {
-  res.render('room', { roomId: req.params.room });
+  res.render('room', {
+    roomId: req.params.room,
+    username: req.session.user.username,
+  });
 });
 
 app.post('/logout', (req, res) => {
@@ -69,4 +73,7 @@ app.all('*', (req, res) => {
   res.status(404).render('404');
 });
 
-module.exports = app;
+module.exports = {
+  app,
+  server,
+};

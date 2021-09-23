@@ -1,22 +1,18 @@
-const socket = io('');
+const socket = io();
 const videoGrid = document.getElementById('video-grid');
 const myVideo = document.createElement('video');
-const backBtn = document.querySelector('.header__back');
+// const backBtn = document.querySelector('.header__back');
 myVideo.muted = true;
 
-backBtn.addEventListener('click', () => {
-  document.querySelector('.main__left').style.display = 'flex';
-  document.querySelector('.main__left').style.flex = '1';
-  document.querySelector('.header__back').style.display = 'none';
-});
+// backBtn.addEventListener('click', () => {
+//   document.querySelector('.main__left').style.display = 'flex';
+//   document.querySelector('.main__left').style.flex = '1';
+//   document.querySelector('.header__back').style.display = 'none';
+// });
 
 const user = prompt('Enter your name');
 
-var peer = new Peer(undefined, {
-  path: '/peerjs',
-  host: '/videocall',
-  port: '3000',
-});
+var peer = new Peer();
 
 let myVideoStream;
 navigator.mediaDevices
@@ -47,9 +43,6 @@ const connectToNewUser = (userId, stream) => {
   call.on('stream', (userVideoStream) => {
     addVideoStream(video, userVideoStream);
   });
-  call.on('close', () => {
-    video.remove();
-  });
 };
 
 peer.on('open', (id) => {
@@ -63,24 +56,6 @@ const addVideoStream = (video, stream) => {
     videoGrid.append(video);
   });
 };
-
-// let text = document.querySelector('#chat_message');
-// let send = document.getElementById('send');
-// let messages = document.querySelector('.messages');
-
-// send.addEventListener('click', (e) => {
-//   if (text.value.length !== 0) {
-//     socket.emit('message', text.value);
-//     text.value = '';
-//   }
-// });
-
-// text.addEventListener('keydown', (e) => {
-//   if (e.key === 'Enter' && text.value.length !== 0) {
-//     socket.emit('message', text.value);
-//     text.value = '';
-//   }
-// });
 
 const inviteButton = document.querySelector('#inviteButton');
 const muteButton = document.querySelector('#muteButton');
@@ -114,11 +89,6 @@ stopVideo.addEventListener('click', () => {
     stopVideo.innerHTML = html;
   }
 });
-const hangUpBtn = document.querySelector('#endButton');
-hangUpBtn.addEventListener('click', function () {
-  conn.close();
-  // showCallContent();
-});
 
 inviteButton.addEventListener('click', (e) => {
   prompt(
@@ -126,14 +96,3 @@ inviteButton.addEventListener('click', (e) => {
     window.location.href
   );
 });
-
-// socket.on('createMessage', (message, userName) => {
-//   messages.innerHTML =
-//     messages.innerHTML +
-//     `<div class="message">
-//         <b><i class="far fa-user-circle"></i> <span> ${
-//           userName === user ? 'me' : userName
-//         }</span> </b>
-//         <span>${message}</span>
-//     </div>`;
-// });

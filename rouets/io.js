@@ -1,7 +1,6 @@
 const io = require('socket.io')();
 const session = require('express-session');
 
-
 const {
   generateMessage,
   generateLocationMessage,
@@ -16,6 +15,10 @@ const {
 io.on('connection', (socket) => {
   console.log('New WebSocket connection');
   console.log(socket.handshake.query.username);
+  socket.on('join-room', (roomId, userId, userName) => {
+    socket.join(roomId);
+    socket.to(roomId).broadcast.emit('user-connected', userId);
+  });
 
   socket.on('join', (options, callback) => {
     const { error, user } = addUser({ id: socket.id, ...options });
@@ -36,14 +39,28 @@ io.on('connection', (socket) => {
     callback();
   });
 
-
-
   //message event
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);
 
     io.to(user.room).emit('message', generateMessage(user.username, message));
     callback();
+  });
+
+  socket.on('callRequest', (message, callback) => {
+    const user = getUser(socket.id);
+
+    // user.room: dest
+    // SEND meetingId to both
+    const roomId = new Date().getTime();
+
+    io.to(user.room).emit('call', {
+      roomId,
+    });
+
+    console.log('its a roomId');
+
+    // callback();
   });
 
   socket.on('sendLocation', (coords, callback) => {
