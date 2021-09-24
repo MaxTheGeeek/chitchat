@@ -14,7 +14,7 @@ const {
 
 io.on('connection', (socket) => {
   console.log('New WebSocket connection');
-  console.log(socket.handshake.query.username);
+  // console.log(socket.handshake.query.username);
   socket.on('join-room', (roomId, userId, userName) => {
     socket.join(roomId);
     socket.to(roomId).broadcast.emit('user-connected', userId);
@@ -56,6 +56,7 @@ io.on('connection', (socket) => {
 
     io.to(user.room).emit('call', {
       roomId,
+      username: user.username,
     });
 
     console.log('its a roomId');

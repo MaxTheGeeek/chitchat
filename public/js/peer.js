@@ -10,7 +10,7 @@ myVideo.muted = true;
 //   document.querySelector('.header__back').style.display = 'none';
 // });
 
-const user = prompt('Enter your name');
+// const user = prompt('Enter your name');
 
 var peer = new Peer();
 
@@ -24,7 +24,7 @@ navigator.mediaDevices
     myVideoStream = stream;
     addVideoStream(myVideo, stream);
 
-    peer.on('call', (call) => {
+    peer.on('call', (call, u) => {
       call.answer(stream);
       const video = document.createElement('video');
       call.on('stream', (userVideoStream) => {
@@ -32,12 +32,15 @@ navigator.mediaDevices
       });
     });
 
-    socket.on('user-connected', (userId) => {
+    socket.on('user-connected', (userId, userName) => {
+      // console.log(2, userName);
+      // user = userName;
       connectToNewUser(userId, stream);
     });
   });
 
 const connectToNewUser = (userId, stream) => {
+  console.log(userId);
   const call = peer.call(userId, stream);
   const video = document.createElement('video');
   call.on('stream', (userVideoStream) => {
@@ -46,6 +49,8 @@ const connectToNewUser = (userId, stream) => {
 };
 
 peer.on('open', (id) => {
+  // user = document.getElementById('myUsername').innerHTML;
+  // console.log(3, user);
   socket.emit('join-room', ROOM_ID, id, user);
 });
 

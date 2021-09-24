@@ -58,6 +58,7 @@ app.use(chatRoutes);
 app.use(profileRoutes);
 
 app.get('/:room', (req, res) => {
+  console.log(1, req.session);
   res.render('room', {
     roomId: req.params.room,
     username: req.session.user.username,
