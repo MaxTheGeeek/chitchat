@@ -2,7 +2,7 @@
   "name": "chitchat",
   "version": "1.0.0",
   "description": "Final Project",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha",
     "dev": "nodemon server.js",
