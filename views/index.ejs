@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./partials/head.ejs') %>
+
+  <body class="bg-dark">
+    <div class="centered-form">
+      <div class="centered-form__box">
+        <form action="/chat" method="GET">
+          <div class="col-12 text-center">
+            <h5 class="text-secondary">Display name:</h5>
+            <h3
+              class="text-center text-warning text-capitalize font-weight-bold"
+            >
+              <%= username %>
+            </h3>
+          </div>
+          <input
+            class="text-light rounded-pill my-3"
+            type="hidden"
+            name="username"
+            value="<%= username %> "
+            placeholder="Display name"
+            autocomplete="off"
+            required
+          />
+          <p class="mb-2 text-secondary text-center">Please select your room</p>
+          <input
+            class="text-light rounded-pill my-3"
+            type="text"
+            name="room"
+            placeholder="Room"
+            autocomplete="off"
+            required
+          />
+          <button class="btn btn-info rounded-pill my-5">Join</button>
+        </form>
+      </div>
+    </div>
+    <script src="/js/chat.js"></script>
+  </body>
+</html>

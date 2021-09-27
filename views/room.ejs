@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>videoChatApp</title>
+    <link rel="stylesheet" href="/css/room.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.3.2/peerjs.min.js"></script>
+    <script>
+      const ROOM_ID = '<%= roomId %>';
+      const user = '<%= username %>';
+    </script>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo">
+        <div class="header__back">
+          <i class="fas fa-angle-left"></i>
+        </div>
+        <!-- videocall title -->
+        <!-- <h3></h3> -->
+      </div>
+    </div>
+    <div class="main">
+      <div class="main__left">
+        <div class="videos__group">
+          <div id="video-grid"></div>
+        </div>
+        <div class="options">
+          <div class="options__left">
+            <div id="stopVideo" class="options__button">
+              <i class="fa fa-video-camera"></i>
+            </div>
+            <div id="muteButton" class="options__button">
+              <i class="fa fa-microphone"></i>
+            </div>
+            <div id="inviteButton" class="options__button">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <div id="endButton" class="options__button">
+              <img src="/img/phone-red.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="/js/peer.js"></script>
+  <script src="/js/chat.js"></script>
+</html>

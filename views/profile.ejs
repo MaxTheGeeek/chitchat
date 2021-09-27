@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/profileStyle.css" />
+    <title>Profile</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <a id="back-link" href="/">
+        <img src="img/back-light-blue.svg" alt="">
+        </a>
+      <h5 class="pb-2 text-secondary text-center account-title">Account settings</h4>
+        
+      <div class="d-flex align-items-start py-3 upload-box">
+        <img
+          src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          class="img"
+          alt=""
+        />
+        <div class="pl-sm-4 pl-2" id="img-section">
+          <b class="text-secondary" id="photo-title">Profile Avatar</b>
+          <p class="text-secondary" id="photo-type">File type JPG, PNG, JPEG Less than 1MB</p>
+          <button class="btn btn-success btn-sm float-right">Upload</button>
+        </div>
+      </div>
+      <div class="input-box">
+        <div class="row py-2">
+          <div class="col-md-6">
+            <label for="firstname">Username</label>
+            <input
+              type="text"
+              class="bg-light form-control"
+              placeholder="Steve"
+            />
+          </div>
+          <div class="col-md-6 pt-2">
+            <label for="lastname">Email</label>
+            <input
+              type="text"
+              class="bg-light form-control"
+              placeholder="Smith"
+            />
+          </div>
+        </div>
+        <div class="row py-2">
+          <div class="col-md-6">
+            <label for="email">Password</label>
+            <input
+              type="text"
+              class="bg-light form-control"
+              placeholder="steve_@email.com"
+            />
+          </div>
+          <div class="col-md-6 pt-md-0 pt-2">
+            <label for="phone">Confirm password</label>
+            <input
+              type="tel"
+              class="bg-light form-control"
+              placeholder="+1 213-548-6015"
+            />
+          </div>
+        </div>
+        <div class="pb-3 pt-3" id="input-btn">
+          <button class="btn btn-primary btn-sm mr-3">Save</button>
+          <button class="btn btn-light btn-sm " id="btn-cancel">Cancel</button>
+        </div>
+        <div class="d-sm-flex align-items-center pt-2" id="deactivate">
+          <div class="text-secondary deactive-title">
+            <b>Deactivate your account</b>
+          </div>
+          <div class="ml-auto">
+            <button class="btn btn-danger py-auto">Deactivate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
