@@ -184,14 +184,14 @@ video {
   color: #fff;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 450px) {
   .main__left {
-    width: 50%;
+    width: 100%;
     flex: 1;
   }
   #video-grid {
-    width: 50%;
-    height: 76vh;
+    width: 80%;
+    height: 79vh;
   }
 
   video {
@@ -199,14 +199,15 @@ video {
     width: 100%;
   }
 }
-@media (max-width: 450px) {
+
+@media (max-width: 700px) {
   .main__left {
-    width: 100%;
+    width: 70%;
     flex: 1;
   }
   #video-grid {
-    width: 50%;
-    height: 79vh;
+    width: 80%;
+    height: 76vh;
   }
 
   video {
